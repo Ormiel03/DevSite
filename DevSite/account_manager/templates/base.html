@@ -8,6 +8,27 @@
 <body>
   <div id="header">
     <span class="logo">DevSite</span>
+    {% if request.user.is_authenticated %}
+      <ul class="menu">
+        <li {% if section == "dashboard" %} class="selected"{% endif %}>
+          <a href="{% url "dashboard" %}">Panel glowny</a>
+        </li>
+        <li {% if section == "urzadzenia" %}class="selected"{% endif %}>
+          <a href="#">Urzadzenia</a>
+        </li>
+        <li {% if section == "asdf" %}class="selected"{% endif %}>
+          <a href="#">Pomoc</a>
+        </li>
+      </ul>
+    {% endif %}
+
+    <span class="user">
+      {% if request.user.is_authenticated %} Witaj, {{ request.user.first_name }}!
+        <a href="{% url "logout" %}">Wyloguj</a>
+      {% else %}
+        <a href="{% url "login" %}">Zaloguj</a>
+      {% endif %}
+    </span>
   </div>
 
   <div id="content">
